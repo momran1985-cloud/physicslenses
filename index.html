@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>العدسات المحدبة والمقعرة – حصة 5E</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12324a;--muted:#5b7387;--bg:#eef5f9;--card:#fff;--brand:#0b6e8a;--brand2:#12a37f;--accent:#ff8a1f;--ok:#17a673;--bad:#e5484d;--line:#d6e4ec;--shadow:0 6px 22px rgba(18,50,74,.09)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;background:linear-gradient(180deg,#e2f0f7,#f6fafc 40%);color:var(--ink);line-height:1.7;font-size:16px}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+sub{font-size:.75em}
+/* header */
+.top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px 16px;background:linear-gradient(100deg,#0b5d7a,#0e8a7d);color:#fff}
+.brand{display:flex;gap:10px;align-items:center}
+.logo{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:24px}
+.brand b{display:block;font-size:18px;line-height:1.2}
+.brand small{opacity:.85;font-size:12.5px}
+.hud{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hud input{padding:6px 10px;border-radius:10px;border:0;width:170px;background:rgba(255,255,255,.95)}
+.pts{background:rgba(255,255,255,.18);padding:4px 12px;border-radius:999px;font-weight:700;white-space:nowrap}
+.hud button{border:0;border-radius:10px;padding:6px 12px;background:rgba(255,255,255,.2);color:#fff;font-weight:700}
+.hud button:hover{background:rgba(255,255,255,.32)}
+/* nav */
+#nav{position:sticky;top:0;z-index:20;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;background:rgba(238,245,249,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+#nav button{flex:1 0 auto;display:flex;align-items:center;gap:8px;border:2px solid var(--line);background:#fff;border-radius:14px;padding:5px 12px;text-align:start;min-width:132px}
+#nav button .nl{width:30px;height:30px;border-radius:9px;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800}
+#nav button .nt{font-weight:700;font-size:14px;line-height:1.25}
+#nav button small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+#nav button.on{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent)}
+#nav button.seen .nl::after{content:"✓";font-size:10px;position:relative;top:-8px;inset-inline-start:2px}
+main{max-width:1020px;margin:0 auto;padding:14px 14px 90px}
+.stage{display:none;animation:fade .35s ease}
+.stage.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.shead{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:linear-gradient(100deg,var(--c),color-mix(in srgb,var(--c) 70%,#000));color:#fff;border-radius:18px;padding:12px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.sbadge{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:26px;font-weight:800}
+.stt{flex:1;min-width:200px}
+.stt h2{margin:0;font-size:22px}
+.stt h2 small{font-size:13px;opacity:.85;font-weight:500;margin-inline-start:6px}
+.stt p{margin:0;opacity:.92;font-size:14.5px}
+.tmr{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.25);padding:5px 10px;border-radius:14px}
+.tmr b{font-size:24px;font-variant-numeric:tabular-nums;min-width:70px;text-align:center}
+.tmr .tmin{font-size:12px;opacity:.85}
+.tmr button{border:0;background:rgba(255,255,255,.25);color:#fff;width:30px;height:30px;border-radius:9px}
+.tmr.over{background:#c0262d;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.7}}
+.card{background:var(--card);border-radius:18px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.card h3{margin:0 0 4px;font-size:19px}
+.sub{color:var(--muted);margin:0 0 10px;font-size:14.5px}
+.note{padding:10px 14px;border-radius:12px;background:#fff7ea;border:1px solid #ffd9a6;margin-top:10px}
+.note.good{background:#e9f9f1;border-color:#a8e5c8}
+details.tip{margin-top:10px;border:1px dashed var(--line);border-radius:12px;padding:6px 12px;background:#fbfdfe;font-size:14px}
+details.tip summary{cursor:pointer;color:var(--brand);font-weight:700}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.row input[type=text],.row input:not([type]){flex:1;min-width:160px;padding:8px 12px;border-radius:10px;border:2px solid var(--line)}
+.btn{border:0;background:var(--brand);color:#fff;padding:8px 16px;border-radius:12px;font-weight:700}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:var(--accent)}
+.btn.ghost{background:#e8f1f6;color:var(--brand)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.seg{display:inline-flex;background:#e8f1f6;border-radius:12px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;padding:6px 14px;border-radius:10px;font-weight:700;color:var(--muted)}
+.seg button.on{background:#fff;color:var(--brand);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+/* KWL */
+.kwl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kcol{border-radius:14px;padding:10px;border:2px solid}
+.kcol h4{margin:0 0 6px;font-size:15px}
+.kcol.k{border-color:#7cc4e8;background:#f1f9fe}.kcol.w{border-color:#f5c36b;background:#fffaf0}.kcol.l{border-color:#a8e5c8;background:#f1fbf6}
+.kcol textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:10px;padding:8px;resize:vertical;background:#fff}
+.lock{min-height:120px;display:grid;place-items:center;text-align:center;color:var(--muted);border:2px dashed #b9e3cf;border-radius:10px}
+.goal{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-radius:14px;border:2px solid var(--line);margin-bottom:8px;background:#fcfeff}
+.goal .gn{width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+.goal select{padding:5px 8px;border-radius:10px;border:2px solid var(--accent);background:#fff7ec;font-weight:700}
+.goal.ok{border-color:var(--ok);background:#effbf5}
+.goal.ok select{border-color:var(--ok);background:#dff6ea}
+.goal.no{animation:shake .4s}
+.rate{display:inline-flex;gap:4px;margin-inline-start:auto;align-items:center;font-size:13px;color:var(--muted)}
+.rate button{border:2px solid var(--line);background:#fff;border-radius:10px;font-size:20px;padding:0 6px}
+.rate button.on{border-color:var(--brand);background:#e6f4fa}
+@keyframes shake{25%{transform:translateX(7px)}50%{transform:translateX(-7px)}75%{transform:translateX(5px)}}
+/* magic lens */
+.magic{position:relative;height:270px;border-radius:16px;overflow:hidden;touch-action:none;cursor:none;background:#fdfaf2;border:2px solid var(--line);user-select:none}
+.scbase,.scinner{position:absolute;left:0;top:0;width:100%;height:100%;background:linear-gradient(135deg,#fffaf0,#eef6fb)}
+.scbase>div,.scinner>div{position:absolute}
+.sc-t{right:5%;top:8%;font-size:26px;font-weight:800;color:#0b5d7a}
+.sc-e{right:5%;top:34%;font-size:34px;letter-spacing:10px}
+.sc-p{right:5%;top:58%;width:62%;font-size:13px;color:#456;line-height:1.5}
+.tiny{font-size:6px;color:#8aa3b5;white-space:nowrap}
+.mlens{position:absolute;border-radius:50%;overflow:hidden;pointer-events:none;box-shadow:0 0 0 5px var(--brand),0 10px 24px rgba(0,0,0,.35);background:#e5eef4}
+.mlens.concave{box-shadow:0 0 0 5px var(--accent),0 10px 24px rgba(0,0,0,.35)}
+.mlens .scinner{transform-origin:0 0}
+.mlens::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),transparent 40%)}
+/* options */
+.opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:8px}
+.opt{border:2px solid var(--line);background:#fff;padding:10px 14px;border-radius:14px;text-align:start;font-weight:500}
+.opt:hover{border-color:var(--brand)}
+.opt.sel{border-color:var(--brand);background:#e6f4fa}
+.opt.ok{border-color:var(--ok);background:#e2f7ec}
+.opt.no{border-color:var(--bad);background:#fdeaea;animation:shake .4s}
+/* lab */
+.labbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:8px}
+.labbar label{display:flex;gap:8px;align-items:center;font-size:14.5px}
+.labbar input[type=range]{width:150px}
+.labwrap canvas{width:100%;border-radius:14px;display:block;touch-action:pan-y;background:#0e2a3f}
+.read{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.read .tag{padding:5px 12px;border-radius:999px;background:#eef5f9;border:1px solid var(--line);font-weight:700;font-size:14px}
+.tag.real{background:#fdeaea;border-color:#f3b4b6;color:#a3262b}.tag.virt{background:#fff3e0;border-color:#ffd49b;color:#9a5a00}
+.tag.inv{background:#eaf1ff;border-color:#b8cdfa;color:#2748a3}.tag.up{background:#e9f9f1;border-color:#a8e5c8;color:#14774f}
+.tag.big{background:#f3ecff;border-color:#d4c0fb;color:#5a2fb0}.tag.small{background:#eefaff;border-color:#b5e2f5;color:#0b6e8a}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.presets button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:3px 10px;font-weight:700;font-size:13.5px}
+.presets button:hover{border-color:var(--brand2)}
+/* venn */
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:54px;padding:10px;border-radius:14px;background:#f3f8fb;border:2px dashed var(--line)}
+.chip{padding:5px 10px;border-radius:11px;background:#fff;border:2px solid var(--line);font-size:13px;cursor:grab;line-height:1.4;max-width:100%;user-select:none}
+.chip.sel{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,31,.25)}
+.chip.ok{background:#e8f8f1;border-color:var(--ok);cursor:default}
+.chip.no{animation:shake .4s;border-color:var(--bad);background:#fdeaea}
+.venn{position:relative;height:430px;margin-top:12px}
+.vc{position:absolute;top:0;height:100%;width:62%;border-radius:50%}
+.vc-r{right:0;background:rgba(14,165,233,.13);border:3px solid #0ea5e9}
+.vc-l{left:0;background:rgba(245,158,11,.14);border:3px solid #f59e0b}
+.vz{position:absolute;top:0;height:100%;padding:46px 6px 6px;border-radius:20px}
+.vz-l{left:0;width:38%}.vz-m{left:38%;width:24%}.vz-r{right:0;width:38%}
+.vz h5{position:absolute;top:12px;left:0;right:0;margin:0;text-align:center;font-size:13.5px}
+.vz-r h5{color:#0a6a99}.vz-l h5{color:#a76400}.vz-m h5{color:#5a2fb0}
+.vlist{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-content:flex-start}
+.vz.over{outline:3px dashed var(--accent);background:rgba(255,138,31,.09)}
+.vz.armed{cursor:pointer;background:rgba(255,138,31,.05)}
+/* table */
+.tbl{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:14.5px}
+.tbl th{font-size:13px;color:var(--muted);text-align:center;padding:2px 4px}
+.tbl td{background:#f7fbfd;padding:6px 6px;text-align:center;border-block:1px solid var(--line)}
+.tbl td:first-child{border-radius:0 12px 12px 0;border-inline-start:1px solid var(--line)}
+.tbl td:last-child{border-radius:12px 0 0 12px;border-inline-end:1px solid var(--line)}
+.tbl tr.ok td{background:#e9f9f1}.tbl tr.no td{background:#fdeeee}
+.tbl select{padding:4px 6px;border-radius:9px;border:2px solid var(--line);background:#fff;max-width:118px}
+.lbadge{padding:2px 10px;border-radius:999px;font-weight:700;font-size:13px}
+.lbadge.cx{background:#dff1fb;color:#0a6a99}.lbadge.cv{background:#fff0d9;color:#9a5a00}
+.tryb{border:2px solid var(--brand2);background:#fff;color:var(--brand2);border-radius:10px;font-weight:700;padding:2px 10px}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:7px 16px;font-weight:700}
+.tabs button.on{border-color:var(--brand2);background:#e6f8f2;color:#0d7a5f}
+.phet{position:relative;width:100%;aspect-ratio:16/10;min-height:320px;border-radius:14px;overflow:hidden;border:2px solid var(--line);background:#102a3b}
+.phet iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.mission{border:2px solid var(--line);border-radius:14px;padding:10px 14px;margin-top:10px;background:#fcfeff}
+.mission.ok{border-color:var(--ok);background:#effbf5}
+.mission h4{margin:0 0 2px;font-size:15.5px}
+.mission .opts{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.concept{border-radius:16px;padding:12px 14px;border:2px solid}
+.concept.cx{border-color:#7cc4e8;background:#f1f9fe}.concept.cv{border-color:#f5c36b;background:#fffaf0}
+.concept h4{margin:0 0 4px}
+.concept ul{margin:0;padding-inline-start:20px}
+/* devices */
+.devs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.dev{border:2px solid var(--line);border-radius:16px;padding:12px;text-align:center;background:#fff}
+.dev .em{font-size:38px}
+.dev b{display:block}
+.dev .bb{display:flex;gap:6px;justify-content:center;margin-top:6px}
+.dev .bb button{flex:1;border:2px solid var(--line);background:#fff;border-radius:10px;padding:4px 6px;font-weight:700}
+.dev.ok{border-color:var(--ok);background:#effbf5}
+.dev.no{animation:shake .4s}
+.dev small{display:block;color:#14774f;margin-top:4px;font-size:12.5px}
+/* quiz */
+.qbar{height:8px;background:#e8f1f6;border-radius:99px;overflow:hidden;margin-bottom:10px}
+.qbar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0;transition:width .3s}
+.qq{font-size:18px;font-weight:700;margin:6px 0}
+.score{font-size:46px;font-weight:800;color:var(--brand)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.kpi{background:#f3f9fc;border:1px solid var(--line);border-radius:14px;padding:8px;text-align:center}
+.kpi b{display:block;font-size:22px;color:var(--brand)}
+.kpi span{font-size:13px;color:var(--muted)}
+.rev{border-radius:12px;padding:8px 12px;margin-top:8px;border:1px solid var(--line);font-size:14.5px}
+.rev.bad{background:#fff6f6;border-color:#f3c2c4}.rev.good{background:#f1fbf6;border-color:#bfe9d3}
+.light{display:flex;gap:10px}
+.light button{font-size:30px;width:56px;height:56px;border-radius:50%;border:3px solid var(--line);background:#fff;opacity:.55}
+.light button.on{opacity:1;transform:scale(1.1);border-color:var(--ink)}
+.growth{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--line)}
+.growth .arrow{font-weight:800}
+textarea.big{width:100%;min-height:70px;border:2px solid var(--line);border-radius:12px;padding:8px;resize:vertical}
+.fnav{position:fixed;bottom:0;inset-inline:0;display:flex;justify-content:space-between;gap:10px;padding:10px 16px;background:rgba(255,255,255,.95);border-top:1px solid var(--line);z-index:25}
+/* tools */
+.tools{position:fixed;top:0;inset-inline-start:0;width:min(360px,94vw);height:100%;overflow:auto;background:#fff;z-index:40;box-shadow:6px 0 30px rgba(0,0,0,.25);padding:14px}
+.tools h4{margin:14px 0 6px}
+.tools textarea{width:100%;min-height:90px;border:2px solid var(--line);border-radius:10px;padding:6px}
+.pickout{font-size:26px;font-weight:800;text-align:center;color:var(--brand);min-height:44px}
+.team{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.team input{flex:1;padding:5px 8px;border:2px solid var(--line);border-radius:9px;min-width:0}
+.team b{font-size:22px;min-width:34px;text-align:center}
+.team button{border:0;border-radius:8px;background:#e8f1f6;padding:3px 9px;font-weight:700}
+#toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:#12324a;color:#fff;padding:8px 18px;border-radius:999px;z-index:60;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center}
+#toast.show{opacity:.96}
+#fx{position:fixed;inset:0;z-index:70;pointer-events:none;display:none}
+.gate{position:fixed;inset:0;z-index:100;background:linear-gradient(135deg,#0b5d7a,#0e8a7d);display:grid;place-items:center;padding:16px;overflow:auto}
+.gatebox{background:#fff;border-radius:22px;padding:24px;width:min(440px,100%);display:grid;gap:8px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.gatebox label{text-align:start;font-weight:700;margin-top:4px}
+.gatebox select{padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:#fff}
+.tools select{width:100%;padding:6px;border:2px solid var(--line);border-radius:10px;margin-bottom:6px}
+@media (max-width:720px){
+ .kwl,.two{grid-template-columns:1fr}
+ .venn{height:auto;display:grid;gap:10px}
+ .vc{display:none}
+ .vz{position:static;width:auto!important;height:auto;min-height:90px;border:2px solid;padding:38px 8px 8px}
+ .vz-r{border-color:#0ea5e9;background:rgba(14,165,233,.08);order:1}.vz-m{border-color:#8b5cf6;background:rgba(139,92,246,.07);order:2}.vz-l{border-color:#f59e0b;background:rgba(245,158,11,.08);order:3}
+ .hud input{width:130px}
+ .stt h2{font-size:19px}
+}
+</style>
+</head>
+<body>
+<div id="gate" class="gate">
+  <div class="gatebox">
+    <div class="logo" style="margin:0 auto;background:#e6f4fa">🔭</div>
+    <h2 style="margin:4px 0 0">مرحبًا بك في حصة العدسات</h2>
+    <p style="margin:0;color:var(--muted)">مدارس الأنجال الأهلية • أ. محمد عمران • ثالث ثانوي</p>
+    <label>الفصل</label><select id="gCls"></select>
+    <label>اسمك</label><select id="gName"><option value="">— اختر الفصل أولًا —</option></select>
+    <button class="btn" id="gGo" style="margin-top:6px">🚀 ابدأ الحصة</button>
+    <button class="btn ghost" id="gTeacher">👨‍🏫 دخول المعلم / معاينة</button>
+  </div>
+</div>
+<header class="top">
+  <div class="brand"><div class="logo">🔭</div>
+    <div><b>العدسات المحدبة والمقعرة</b><small>مدارس الأنجال الأهلية بالأحساء • أ. محمد عمران • فيزياء ٣ ثانوي • حصة 35 د (5E)</small></div></div>
+  <div class="hud">
+    <div class="pts" id="whoBox">👤 <span id="whoName">—</span> <button id="whoChange" style="padding:2px 8px;font-size:12px">تغيير</button></div>
+    <div class="pts">⭐ <span id="ptsN">0</span> • <span id="lvl">مستكشف 🔭</span></div>
+    <button id="soundBtn" title="الصوت">🔊</button>
+    <button id="toolsBtn">🧰 أدوات المعلم</button>
+  </div>
+</header>
+<nav id="nav"></nav>
+
+<aside id="tools" class="tools hidden">
+  <div class="row" style="justify-content:space-between;margin:0"><b style="font-size:18px">🧰 أدوات المعلم</b><button class="btn ghost" id="toolsClose">✕</button></div>
+  <h4>🎲 عجلة الأسماء (اختيار عشوائي)</h4>
+  <select id="rosterSel"></select>
+  <textarea id="names" placeholder="اكتب اسم كل طالب في سطر"></textarea>
+  <div class="row"><button class="btn alt" id="pickBtn">🎲 اختر طالبًا</button></div>
+  <div class="pickout" id="pickOut"></div>
+  <h4>🏆 لوحة تنافس الفرق</h4>
+  <div id="teams"></div>
+  <h4>✉️ بريد المعلم (لاستلام التقارير)</h4>
+  <input id="teacherEmail" type="email" placeholder="name@school.edu.sa" style="width:100%;padding:7px 10px;border:2px solid var(--line);border-radius:10px">
+  <h4>🌐 روابط سريعة</h4>
+  <div class="row">
+    <a class="btn ghost" style="text-decoration:none" target="_blank" rel="noopener" href="https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_ar.html">PhET بالعربية</a>
+    <a class="btn ghost" style="text-decoration:none" target="_blank" rel="noopener" href="https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_en.html">PhET English</a>
+  </div>
+  <h4>⏱ توزيع زمن الحصة</h4>
+  <div id="timeplan" style="font-size:14px"></div>
+  <h4>♻️ جلسة جديدة</h4>
+  <button class="btn ghost" id="resetAll">إعادة تحميل الصفحة وتصفير النقاط</button>
+</aside>
+
+<main>
+<!-- ===== 0: KWL ===== -->
+<section class="stage" id="s0">
+  <div class="shead" data-i="0"></div>
+  <div class="card">
+    <h3>📋 جدول التعلم الذاتي (KWL)</h3>
+    <p class="sub">اكتب ما تعرفه الآن وما تتمنى معرفته عن العدسات. عمود «تعلّمت» سيُفتح في نهاية الحصة.</p>
+    <div class="kwl">
+      <div class="kcol k"><h4>K • ماذا أعرف؟</h4><textarea id="kText" placeholder="مثال: المكبرة تكبّر الأشياء، النظارات الطبية فيها عدسات…"></textarea></div>
+      <div class="kcol w"><h4>W • ماذا أريد أن أعرف؟</h4><textarea id="wText" placeholder="مثال: لماذا تنقلب الصورة أحيانًا؟"></textarea></div>
+      <div class="kcol l"><h4>L • ماذا تعلّمت؟</h4><div class="lock">🔒 يُفتح في مرحلة التغذية الراجعة</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🎯 استنتج أهداف الحصة</h3>
+    <p class="sub">من أسئلتك ومن صور الكتاب (أنواع العدسات، الصور الحقيقية والخيالية) اختر <b>الفعل المناسب</b> لكل هدف. ثم قيّم نفسك: أين أنا الآن؟</p>
+    <div id="goals"></div>
+    <div id="goalsDone" class="note good hidden">🎉 أحسنت! هذه هي أهداف حصتنا. سنعود لتقييم نفسك في النهاية لنرى حجم تقدّمك.</div>
+    <details class="tip"><summary>💡 فكرة للمعلم</summary>اطلب من 3 طلاب قراءة أسئلتهم (W) صوتيًا، ثم اربطها بالأهداف. استخدم «عجلة الأسماء» من أدوات المعلم.</details>
+  </div>
+</section>
+
+<!-- ===== 1: Engage ===== -->
+<section class="stage" id="s1">
+  <div class="shead" data-i="1"></div>
+  <div class="card">
+    <h3>🪄 العدسة السحرية</h3>
+    <p class="sub">حرّك الماوس (أو إصبعك) فوق المشهد، وبدّل نوع العدسة. ماذا يحدث لحجم ما تراه؟ وابحث عن <b>كلمة سرية</b> مكتوبة بخط صغير جدًا!</p>
+    <div class="seg" id="magicSeg"><button class="on" data-k="convex">🔍 عدسة محدبة</button><button data-k="concave">🔎 عدسة مقعرة</button></div>
+    <div class="magic" id="magic" style="margin-top:10px"></div>
+    <div class="row"><input id="secret" type="text" placeholder="اكتب الكلمة السرية…"><button class="btn" id="secretBtn">تحقّق</button><span id="secretMsg"></span></div>
+  </div>
+  <div class="card">
+    <h3>🤔 توقّع قبل أن نكتشف</h3>
+    <p class="sub">عندما تمرّ حزمة أشعة ضوئية متوازية خلال كل عدسة، ماذا يحدث لها؟</p>
+    <div class="opts" id="predOpts"></div>
+    <div id="predMsg" class="note hidden"></div>
+    <div class="row"><input id="qInput" type="text" placeholder="سؤال خطر ببالك؟ اكتبه لنضيفه إلى عمود (W)"><button class="btn ghost" id="qBtn">➕ أضِفه إلى (W)</button></div>
+    <details class="tip"><summary>💡 فكرة للمعلم</summary>اعرض الصورة الأولى للمكبرة ثم صورة قطرة ماء على ورقة مطبوعة، واسأل: «لماذا تكبّر قطرة الماء الحروف؟» قبل فتح العدسة السحرية.</details>
+  </div>
+</section>
+
+<!-- ===== 2: Explore ===== -->
+<section class="stage" id="s2">
+  <div class="shead" data-i="2"></div>
+  <div class="card">
+    <h3>🧪 الجزء ١ (3 د): مختبر الأشعة — جرّب العدستين</h3>
+    <p class="sub">بدّل بين العدستين، وغيّر البعد البؤري <b>f</b>، ولاحظ مسار الأشعة الضوئية المتوازية بعد مرورها.</p>
+    <div class="labwrap" id="labBeam"></div>
+    <div id="predResult" class="note hidden"></div>
+    <div class="row"><a class="btn ghost" style="text-decoration:none" target="_blank" rel="noopener" href="https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_ar.html">🌐 تحقّق أيضًا بمحاكاة PhET (نافذة جديدة)</a></div>
+  </div>
+  <div class="card">
+    <h3>⭕ الجزء ٢ (4 د): مخطط فن — قارن بين العدستين</h3>
+    <p class="sub">اضغط على البطاقة ثم اضغط على المنطقة المناسبة (أو اسحبها بالماوس). المنطقة الوسطى للخصائص <b>المشتركة</b>.</p>
+    <div class="pool" id="pool"></div>
+    <div class="venn" id="venn">
+      <div class="vc vc-l"></div><div class="vc vc-r"></div>
+      <div class="vz vz-l" data-z="concave"><h5>🔎 المقعرة فقط</h5><div class="vlist"></div></div>
+      <div class="vz vz-m" data-z="both"><h5>🤝 مشترك</h5><div class="vlist"></div></div>
+      <div class="vz vz-r" data-z="convex"><h5>🔍 المحدبة فقط</h5><div class="vlist"></div></div>
+    </div>
+    <div class="row"><b id="vennCount">0 / 11</b><span style="color:var(--muted)">بطاقة موضوعة في مكانها الصحيح</span></div>
+    <div id="vennDone" class="note good hidden"><b>الاستنتاج:</b> المحدبة أسمك عند الوسط وتُجمِّع الأشعة (f موجب)، والمقعرة أسمك عند الأطراف وتُفرِّق الأشعة (f سالب). وكلتاهما شفافة وتعمل بالانكسار.</div>
+    <details class="tip"><summary>💡 فكرة للمعلم</summary>قسّم الصف إلى فريقين: الأول يدافع عن «المحدبة» والثاني عن «المقعرة»، ومن يضع البطاقة صحيحًا أولًا يكسب نقطة في لوحة الفرق.</details>
+  </div>
+</section>
+
+<!-- ===== 3: Explain ===== -->
+<section class="stage" id="s3">
+  <div class="shead" data-i="3"></div>
+  <div class="tabs" id="expTabs">
+    <button class="on" data-t="A">🧪 المختبر + جدول الخصائص</button>
+    <button data-t="B">🌐 محاكاة PhET</button>
+    <button data-t="C">📘 الخلاصة</button>
+  </div>
+  <div id="tabA">
+    <div class="card">
+      <h3>🔬 حرّك الجسم واستنتج خصائص الصورة</h3>
+      <p class="sub">اسحب الجسم الأزرق على اللوحة (أو استخدم المنزلق أو الأزرار السريعة) وراقب نوع الصورة واتجاهها وحجمها.</p>
+      <div class="labwrap" id="labImg"></div>
+    </div>
+    <div class="card">
+      <h3>📝 أكمل جدول خصائص الصور</h3>
+      <p class="sub">اضغط «جرّب» لينتقل المختبر إلى الحالة المطلوبة، ثم اختر خصائص الصورة.</p>
+      <table class="tbl" id="tbl"></table>
+      <div class="row"><button class="btn" id="tblCheck">✔️ تحقّق من الجدول</button><span id="tblMsg"></span></div>
+      <div class="note">💡 معادلة العدسة الرقيقة: <b>1/f = 1/d<sub>o</sub> + 1/d<sub>i</sub></b> ، والتكبير: <b>m = −d<sub>i</sub>/d<sub>o</sub></b>. إذا كان m سالبًا فالصورة <b>مقلوبة</b> (حقيقية)، وإذا كان موجبًا فهي <b>معتدلة</b> (خيالية).</div>
+    </div>
+  </div>
+  <div id="tabB" class="hidden">
+    <div class="card">
+      <h3>🌐 تحقّق بمحاكاة PhET: Geometric Optics</h3>
+      <p class="sub">نفّذ المهام التالية داخل المحاكاة ثم أجب عن سؤال كل مهمة.</p>
+      <div class="row" style="margin:0 0 8px"><button class="btn alt" id="phetLoad">▶ تشغيل المحاكاة هنا</button>
+        <a class="btn ghost" style="text-decoration:none" target="_blank" rel="noopener" href="https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_ar.html">فتح في نافذة جديدة</a>
+        <a class="btn ghost" style="text-decoration:none" target="_blank" rel="noopener" href="https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_en.html">English</a></div>
+      <div class="phet" id="phetBox"><div style="position:absolute;inset:0;display:grid;place-items:center;color:#cfe3ee;text-align:center;padding:20px">اضغط «تشغيل المحاكاة هنا». إذا لم تظهر فافتحها في نافذة جديدة وشارك شاشتك.</div></div>
+      <div id="missions"></div>
+    </div>
+  </div>
+  <div id="tabC" class="hidden">
+    <div class="card">
+      <h3>📘 خلاصة الدرس</h3>
+      <div class="two">
+        <div class="concept cx"><h4>🔍 العدسة المحدبة (المجمِّعة)</h4><ul>
+          <li>تجمّع الأشعة المتوازية في البؤرة (f موجب).</li>
+          <li><b>d<sub>o</sub> &gt; f</b>: صورة حقيقية مقلوبة (مصغرة إذا d<sub>o</sub> &gt; 2f، ومكبرة إذا f &lt; d<sub>o</sub> &lt; 2f).</li>
+          <li><b>d<sub>o</sub> &lt; f</b>: صورة خيالية معتدلة مكبرة (المكبرة).</li></ul></div>
+        <div class="concept cv"><h4>🔎 العدسة المقعرة (المفرِّقة)</h4><ul>
+          <li>تفرّق الأشعة المتوازية (f سالب).</li>
+          <li>تكوّن صورة <b>خيالية معتدلة مصغرة دائمًا</b>.</li>
+          <li>لا يمكن أن تكوّن صورة حقيقية.</li></ul></div>
+      </div>
+      <div class="note good" style="margin-top:12px">🧠 قاعدة سريعة: <b>الصورة الحقيقية = مقلوبة وتُلتقط على شاشة</b> • <b>الصورة الخيالية = معتدلة ولا تُلتقط على شاشة</b>.</div>
+    </div>
+  </div>
+  <details class="tip"><summary>💡 فكرة للمعلم</summary>اطلب من الطلاب توقّع الخصائص <b>قبل</b> الضغط على «جرّب»، وكافئ أدق توقع. وشارك شاشة PhET لتوضيح كيف تختفي الصورة الحقيقية عند البؤرة.</details>
+</section>
+
+<!-- ===== 4: Elaborate ===== -->
+<section class="stage" id="s4">
+  <div class="shead" data-i="4"></div>
+  <div class="card">
+    <h3>🌍 أي عدسة تستخدمها هذه الأداة؟</h3>
+    <p class="sub">اختر نوع العدسة المناسب لكل تطبيق، وفكّر: ما خصائص الصورة التي نحتاجها؟</p>
+    <div class="devs" id="devs"></div>
+    <div class="row"><b id="devCount">0 / 6</b></div>
+  </div>
+</section>
+
+<!-- ===== 5: Evaluate ===== -->
+<section class="stage" id="s5">
+  <div class="shead" data-i="5"></div>
+  <div class="card" id="quizCard">
+    <div class="qbar"><i id="qbar"></i></div>
+    <div id="quizBody"></div>
+  </div>
+</section>
+
+<!-- ===== 6: Feedback ===== -->
+<section class="stage" id="s6">
+  <div class="shead" data-i="6"></div>
+  <div class="card">
+    <h3>📊 تقرير إنجازك</h3>
+    <div class="kpis" id="kpis"></div>
+  </div>
+  <div class="card">
+    <h3>🔁 راجع إجاباتك في الاختبار</h3>
+    <div id="review"><p class="sub">أنهِ مرحلة التقويم أولًا لتظهر مراجعتك.</p></div>
+  </div>
+  <div class="card">
+    <h3>📈 قياس النمو: أين أنا الآن؟</h3>
+    <p class="sub">قيّم نفسك من جديد في كل هدف، وسنقارنه بتقييمك في بداية الحصة.</p>
+    <div id="growth"></div>
+  </div>
+  <div class="card">
+    <h3>🧾 أكمل جدول التعلم (KWL) وتذكرة الخروج</h3>
+    <div class="two">
+      <div><b>K / W (من بداية الحصة)</b><div id="kwSummary" class="rev"></div></div>
+      <div><b>L • ماذا تعلّمت؟</b><textarea class="big" id="lText" placeholder="اكتب 3 أشياء تعلّمتها…"></textarea></div>
+    </div>
+    <div class="row"><input id="leftQ" type="text" placeholder="سؤال ما زال في ذهني…"></div>
+    <div class="row"><input id="tweet" type="text" maxlength="140" placeholder="🐦 لخّص الدرس في تغريدة (140 حرفًا)"></div>
+    <p class="sub" style="margin-top:10px">🚦 إشارة الفهم: كيف تقيّم فهمك للدرس؟</p>
+    <div class="light" id="light"><button data-v="red">🔴</button><button data-v="yellow">🟡</button><button data-v="green">🟢</button></div>
+  </div>
+  <div class="card">
+    <h3>📤 إرسال التقرير للمعلم</h3>
+    <div class="row"><button class="btn" id="mailBtn">✉️ إرسال بالبريد</button><button class="btn ghost" id="copyBtn">📋 نسخ التقرير</button></div>
+    <pre id="reportOut" class="rev" style="white-space:pre-wrap;display:none;font-family:inherit"></pre>
+    <details class="tip"><summary>💡 فكرة للمعلم</summary>اطلب من 3 طلاب مشاركة «تغريدة الدرس» صوتيًا، وأغلق الحصة بسؤال: «ما الفكرة التي ستحكيها لأسرتك اليوم؟»</details>
+  </div>
+</section>
+</main>
+
+<div class="fnav">
+  <button class="btn ghost" id="prevBtn">▶ السابق</button>
+  <button class="btn" id="nextBtn">التالي ◀</button>
+</div>
+<div id="toast"></div>
+<canvas id="fx"></canvas>
+
+<script>
+/* ================= أدوات عامة ================= */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const pad=n=>String(n).padStart(2,'0');
+const store={get(k,d){try{const v=localStorage.getItem('lens5e_'+k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem('lens5e_'+k,v)}catch(e){}}};
+const STAGES=[
+ {letter:'🧭',name:'جدول التعلم والأهداف',en:'KWL',min:4,color:'#64748b',desc:'اكتب ما تعرفه، واستنتج أهداف الحصة'},
+ {letter:'E',name:'التهيئة',en:'Engage',min:4,color:'#7c5cff',desc:'العدسة السحرية وتوقّع قبل الاكتشاف'},
+ {letter:'E',name:'الاستكشاف',en:'Explore',min:7,color:'#0ea5e9',desc:'مختبر الأشعة ومخطط فن للمقارنة'},
+ {letter:'E',name:'الشرح',en:'Explain',min:9,color:'#10b981',desc:'خصائص الصور في العدستين + محاكاة PhET'},
+ {letter:'E',name:'التوسع',en:'Elaborate',min:3,color:'#f59e0b',desc:'تطبيقات حياتية للعدسات'},
+ {letter:'E',name:'التقويم',en:'Evaluate',min:5,color:'#ef4444',desc:'اختبار ختامي قصير (6 أسئلة)'},
+ {letter:'💬',name:'التغذية الراجعة',en:'Feedback',min:3,color:'#8b5cf6',desc:'راجع، قيّم نمو تعلّمك، وأكمل جدول KWL'}
+];
+const S={pts:0,goals:0,rate0:{},rate1:{},venn:0,rows:new Set(),dev:0,miss:new Set(),pred:null,seen:{convex:true,concave:false},predShown:false,secret:false,quiz:null,light:null};
+let soundOn=true,AC=null,cur=0;
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),1700)}
+function tone(f,d,type='sine',v=.08,delay=0){if(!soundOn)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(AC.destination);const t=AC.currentTime+delay;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.start(t);o.stop(t+d+.05)}catch(e){}}
+const sfx={ok(){tone(660,.12);tone(880,.18,'sine',.08,.1)},bad(){tone(200,.25,'sawtooth',.04)},end(){tone(520,.2);tone(520,.2,'sine',.08,.3);tone(780,.35,'sine',.08,.6)},win(){[523,659,784,1047].forEach((f,i)=>tone(f,.22,'triangle',.08,i*.12))},tick(){tone(900,.05,'square',.02)}};
+function addPts(n){S.pts+=n;$('#ptsN').textContent=S.pts;const L=[[180,'أسطورة الضوء 🌟'],[120,'عالِم بصريات 🏆'],[60,'باحث ⚗️'],[0,'مستكشف 🔭']];$('#lvl').textContent=L.find(l=>S.pts>=l[0])[1];toast('+'+n+' ⭐');}
+function confetti(){const c=$('#fx'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;c.style.display='block';const ps=Array.from({length:130},()=>({x:Math.random()*c.width,y:-20-Math.random()*250,vx:(Math.random()-.5)*4,vy:2+Math.random()*4,r:4+Math.random()*5,col:`hsl(${Math.random()*360},85%,60%)`,rot:Math.random()*6}));let f=0;(function a(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.fillStyle=p.col;x.fillRect(-p.r,-p.r/2,p.r*2,p.r);x.restore()});if(++f<150)requestAnimationFrame(a);else{x.clearRect(0,0,c.width,c.height);c.style.display='none'}})();sfx.win();}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ================= الهيكل والمؤقتات ================= */
+const T=STAGES.map(s=>({left:s.min*60,running:false,started:false}));
+const seenStages=new Set();
+function buildNav(){
+  $('#nav').innerHTML=STAGES.map((s,i)=>`<button data-i="${i}" style="--c:${s.color}"><span class="nl">${s.letter}</span><span class="nt">${s.name}<small>${s.en} • ${s.min} د</small></span></button>`).join('');
+  $$('#nav button').forEach(b=>b.onclick=()=>goStage(+b.dataset.i));
+  $('#timeplan').innerHTML=STAGES.map(s=>`<div>• ${s.name}: <b>${s.min} د</b></div>`).join('')+`<div style="margin-top:4px">المجموع: <b>${STAGES.reduce((a,s)=>a+s.min,0)} دقيقة</b></div>`;
+}
+function buildHeads(){
+  $$('.shead').forEach(h=>{const i=+h.dataset.i,s=STAGES[i];h.style.setProperty('--c',s.color);
+    h.innerHTML=`<div class="sbadge">${s.letter}</div><div class="stt"><h2>${s.name} <small>${s.en}</small></h2><p>${s.desc}</p></div><div class="tmr" id="tmbox${i}"><span class="tmin">${s.min} د</span><b id="tm${i}">${pad(s.min)}:00</b><button id="tmb${i}" title="تشغيل/إيقاف">▶</button><button id="tmr${i}" title="إعادة">↺</button></div>`;
+    $('#tmb'+i).onclick=()=>toggleTimer(i);$('#tmr'+i).onclick=()=>resetTimer(i);});
+}
+function renderTimer(i){const t=T[i],el=$('#tm'+i);if(!el)return;const v=Math.abs(t.left);el.textContent=(t.left<0?'+':'')+pad(Math.floor(v/60))+':'+pad(v%60);$('#tmbox'+i).classList.toggle('over',t.left<=0);$('#tmb'+i).textContent=t.running?'⏸':'▶';}
+function toggleTimer(i){T[i].running=!T[i].running;T[i].started=true;renderTimer(i)}
+function resetTimer(i){T[i].left=STAGES[i].min*60;T[i].running=true;T[i].started=true;renderTimer(i)}
+setInterval(()=>{const t=T[cur];if(t.running){t.left--;if(t.left===0){sfx.end();toast('⏰ انتهى زمن مرحلة «'+STAGES[cur].name+'»')}renderTimer(cur)}},1000);
+function goStage(i){
+  if(i<0||i>=STAGES.length)return;
+  T[cur].running=false;renderTimer(cur);
+  cur=i;
+  $$('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
+  seenStages.add(i);
+  $$('#nav button').forEach((b,k)=>{b.classList.toggle('on',k===i);b.classList.toggle('seen',seenStages.has(k)&&k!==i)});
+  if(!T[i].started){T[i].started=true;T[i].running=true}else if(T[i].left>0){T[i].running=true}
+  renderTimer(i);
+  $('#prevBtn').disabled=i===0;$('#nextBtn').disabled=i===STAGES.length-1;
+  $('#nextBtn').textContent=i===STAGES.length-2?'التغذية الراجعة ◀':'التالي ◀';
+  window.scrollTo({top:0,behavior:'smooth'});
+  const nb=$('#nav button.on');if(nb)nb.scrollIntoView({inline:'center',block:'nearest'});
+  if(i===2){S.seen.convex=true;setTimeout(()=>labBeam.resize(),30)}
+  if(i===3){setTimeout(()=>labImg.resize(),30)}
+  if(i===1){setTimeout(()=>magic.put(),30)}
+  if(i===6)renderFeedback();
+}
+
+/* ================= المرحلة 0: KWL والأهداف ================= */
+const GOALS=[
+ {pre:'أن',post:'كيف تتكوّن الصور الحقيقية والخيالية بواسطة العدسات المحدبة والمقعرة.',a:'أصف',hint:'تتحدث عن «كيف» تتكوّن الصورة — ماذا تفعل بالكلمات والرسم لتوضّح ذلك؟'},
+ {pre:'أن',post:'بين العدسة المحدبة والمقعرة في الشكل وتأثيرهما في الأشعة.',a:'أقارن',hint:'كلمة «بين» تدل على وجود طرفين نضعهما جنبًا إلى جنب.'},
+ {pre:'أن',post:'خصائص الصورة (النوع، الاتجاه، الحجم) تبعًا لموضع الجسم.',a:'أستنتج',hint:'نصل إلى الخصائص من الملاحظة والتجريب.'},
+ {pre:'أن',post:'محاكاة PhET للتحقق من توقعاتي.',a:'أستخدم',hint:'الأداة التي سنعمل بها في الحصة.'},
+ {pre:'أن',post:'ما تعلّمته في تفسير عمل المكبرة والنظارة والكاميرا.',a:'أطبّق',hint:'نستعمل المعرفة في مواقف حياتية جديدة.'}
+];
+const VERBS=['أصف','أقارن','أستنتج','أستخدم','أطبّق'];
+function buildGoals(){
+  $('#goals').innerHTML=GOALS.map((g,i)=>`<div class="goal" data-i="${i}"><span class="gn">${i+1}</span><span>${g.pre}</span>
+   <select><option value="">— اختر الفعل —</option>${VERBS.map(v=>`<option>${v}</option>`).join('')}</select><span>${g.post}</span>
+   <span class="rate hidden">أين أنا الآن؟ <button data-r="1" title="أحتاج مساعدة">🙁</button><button data-r="2" title="متوسط">😐</button><button data-r="3" title="متمكن">🙂</button></span></div>`).join('');
+  $$('#goals .goal').forEach(el=>{const i=+el.dataset.i,sel=$('select',el);
+    sel.onchange=()=>{ if(!sel.value)return;
+      if(sel.value===GOALS[i].a){el.classList.add('ok');el.classList.remove('no');sel.disabled=true;$('.rate',el).classList.remove('hidden');S.goals++;addPts(5);sfx.ok();
+        if(S.goals===GOALS.length){$('#goalsDone').classList.remove('hidden');confetti()}}
+      else{el.classList.remove('no');void el.offsetWidth;el.classList.add('no');sel.value='';sfx.bad();toast('💡 '+GOALS[i].hint)}};
+    $$('.rate button',el).forEach(b=>b.onclick=()=>{S.rate0[i]=+b.dataset.r;$$('.rate button',el).forEach(x=>x.classList.toggle('on',x===b))});
+  });
+}
+function initKWL(){
+  const k=$('#kText'),w=$('#wText');k.value=store.get('k','');w.value=store.get('w','');
+  k.oninput=()=>store.set('k',k.value);w.oninput=()=>store.set('w',w.value);
+}
+const ROSTER={
+ 'ثالث ثانوي (عام 1)':['حسين محمد بن علي العلي','رضا علاء بن محمد عبد','عبدالعزيز عبدالوهاب الموسى','فراس سامي النغموش','أحمد بدر بن خالد الجغيمان','عبدالله سعد بن عبدالله الدوسري','سالم أحمد الدوغان','تركي بدر المعيلي','زياد صالح عيد العتيبي','عبدالله جمال المتيعب','مهدي محمد سليمان الشمس','عبدالله عماد المحفيظ','أحمد سلمان بالطيور','علي محمد الرفيعي','صالح طاهر الحداد','مبارك طليفيح الدوسري','عبدالله فيحان الدوسري'],
+ 'ثالث ثانوي (عام 2)':['أحمد حسن بن احمد المعيبد','تمام نايف عبد الرحمن آل الشيخ مبارك','زياد حسن بن ناصر العلي','عبدالرحمن صالح محمد الملحم','عبدالعزيز بن ابراهيم بن صالح التنم','محمد احمد فهد الملحم','محمد عبداللطيف بن محمد الملحم','مشعل احمد ابراهيم الملحم','يوسف سامي ابن خالد الملحم','فيصل خالد الشريط','راكان قاسم بن محمد العلي','سعدون احمد بن سعدون السعدون','عبدالعزيز خالد بن علي الغافلي','عبدالله عبدالمنعم بن محمد الخميس','علي حسين بن حبيب الغزال','محمد غازي بن حسن الغزال','تميم عبدالمنعم بن محمد الطلحه','لطان عبدالهادي المرزوق','مهند خضر بن علي الغامدي','ناصر رائد محمد الملحم','عبدالعزيز محمد الملحم'],
+ 'ثالث ثانوي (3)':['الحسين صادق بن واصل الدندن','الحسين علي بن احمد الحداد','أحمد عبداللطيف بن احمد الدهموش','حسين عبدالعزيز بن جعفر البقشي','حسين علي بن محمد العلي','خالد عبدالعالي خالد العبدالعالي','سعد محمد سعد العواد','عبداللطيف فيصل عبداللطيف العبيد','عبدالله حسين بن عبدالله العباد','عبدالله علي ابن عبدالله العيسى','علي حسين بن علي العبدالمحسن','علي عماد بن علي الخليفه','علي يوسف بن احمد السبيعي','قصي عبدالرزاق بن صادق الحاجي','محمد احمد بن حبيب الرمضان','محمد عبدالحميد بن محمد السعد','هادي محمد بن علي الصالح','هاني سلمان بن ابراهيم التريكي','يوسف علاء بن جواد البقشي','أحمد وليد عسيري','مبارك عبدالمحسن مبارك الملحم']
+};
+S.user=null;
+function login(cls,name){S.user={cls,name};store.set('cls',cls);store.set('name',name);$('#whoName').textContent=name+(cls?' • '+cls:'');$('#gate').classList.add('hidden')}
+function initGate(){
+  const c=$('#gCls'),n=$('#gName');
+  c.innerHTML='<option value="">— اختر الفصل —</option>'+Object.keys(ROSTER).map(k=>`<option>${k}</option>`).join('');
+  const fill=()=>{n.innerHTML='<option value="">— اختر اسمك —</option>'+(ROSTER[c.value]||[]).map(x=>`<option>${x}</option>`).join('')};
+  c.onchange=fill;
+  const lc=store.get('cls',''),ln=store.get('name','');
+  if(ROSTER[lc]){c.value=lc;fill();if(ROSTER[lc].includes(ln))n.value=ln}
+  $('#gGo').onclick=()=>{if(!c.value||!n.value){toast('اختر فصلك واسمك أولًا');return}login(c.value,n.value)};
+  $('#gTeacher').onclick=()=>login('','المعلم (معاينة)');
+  $('#whoChange').onclick=()=>$('#gate').classList.remove('hidden');
+  const rs=$('#rosterSel');rs.innerHTML='<option value="">— تعبئة الأسماء من فصل —</option>'+Object.keys(ROSTER).map(k=>`<option>${k}</option>`).join('');
+  rs.onchange=()=>{if(rs.value){names.value=ROSTER[rs.value].join('\n');store.set('names',names.value)}};
+}
+
+/* ================= المرحلة 1: التهيئة ================= */
+const SCENE=`<div class="sc-t">اقرأ… ثم اقرأ بعمق!</div><div class="sc-e">🔬🐞🌍🔭🧬</div>
+<div class="sc-p">العدسات أدوات بصرية شفافة تعتمد على انكسار الضوء عند مروره من وسط إلى آخر، ولكل عدسة سطحان منحنيان.</div>
+<span class="tiny" style="position:absolute;left:9%;top:82%">ضوء</span><span class="tiny" style="position:absolute;left:46%;top:21%">شعاع</span>
+<span class="tiny" style="position:absolute;left:30%;top:90%;color:#7b93a6">انكسار</span><span class="tiny" style="position:absolute;left:78%;top:14%">بؤرة</span>`;
+const magic=(function(){
+  const box=$('#magic');
+  box.innerHTML='<div class="scbase">'+SCENE+'</div><div class="mlens" id="mlens"><div class="scinner">'+SCENE+'</div></div>';
+  const lens=$('#mlens'),inner=$('.scinner',lens);
+  let kind='convex',R=64,px=null,py=null;
+  function put(){
+    const w=box.clientWidth,h=box.clientHeight;if(!w)return;
+    if(px===null){px=w*.3;py=h*.45}
+    const k=kind==='convex'?2.8:.5;
+    inner.style.width=w+'px';inner.style.height=h+'px';
+    inner.style.transform=`translate(${R-px*k}px,${R-py*k}px) scale(${k})`;
+    lens.style.width=lens.style.height=(2*R)+'px';lens.style.left=(px-R)+'px';lens.style.top=(py-R)+'px';
+    lens.classList.toggle('concave',kind==='concave');
+  }
+  function move(e){const r=box.getBoundingClientRect();px=e.clientX-r.left;py=e.clientY-r.top;put()}
+  box.addEventListener('pointermove',move);box.addEventListener('pointerdown',move);
+  $$('#magicSeg button').forEach(b=>b.onclick=()=>{kind=b.dataset.k;$$('#magicSeg button').forEach(x=>x.classList.toggle('on',x===b));put()});
+  new ResizeObserver(put).observe(box);
+  return {put};
+})();
+$('#secretBtn').onclick=()=>{const v=$('#secret').value.trim();
+  if(v==='انكسار'){ if(!S.secret){S.secret=true;addPts(10);confetti()} $('#secretMsg').textContent='✅ أحسنت! «انكسار» هو أساس عمل العدسات.'}
+  else{$('#secretMsg').textContent='🔎 ليست هي… كبّر بالعدسة المحدبة وابحث في الأسفل!';sfx.bad()}};
+const PRED=['المحدبة تجمّع الأشعة، والمقعرة تفرّقها','المحدبة تفرّق الأشعة، والمقعرة تجمّعها','كلتاهما تجمّع الأشعة','لا تتأثر الأشعة بالعدستين'];
+$('#predOpts').innerHTML=PRED.map((t,i)=>`<button class="opt" data-i="${i}">${t}</button>`).join('');
+$$('#predOpts .opt').forEach(b=>b.onclick=()=>{S.pred=+b.dataset.i;$$('#predOpts .opt').forEach(x=>x.classList.toggle('sel',x===b));
+  const m=$('#predMsg');m.classList.remove('hidden');m.textContent='📌 سجّلنا توقعك! سنختبره بالتجربة في مرحلة الاستكشاف.';sfx.tick()});
+$('#qBtn').onclick=()=>{const q=$('#qInput').value.trim();if(!q)return;const w=$('#wText');w.value=(w.value?w.value+'\n':'')+'• '+q;store.set('w',w.value);$('#qInput').value='';toast('تمت إضافة سؤالك إلى عمود (W) ✍️');sfx.tick()};
+
+/* ================= مختبر العدسات (Canvas) ================= */
+function Lab(root,mode){
+  const st={type:'convex',f:30,d:75};
+  const api={st,onChange:null};
+  root.innerHTML=`<div class="labbar">
+    <div class="seg" data-r="type"><button class="on" data-v="convex">🔍 محدبة</button><button data-v="concave">🔎 مقعرة</button></div>
+    <label>f = <b data-r="fv">30</b> سم <input type="range" min="20" max="40" value="30" data-r="f"></label>
+    ${mode==='image'?'<label>d<sub>o</sub> = <b data-r="dv">75</b> سم <input type="range" min="10" max="115" value="75" data-r="d"></label>':''}
+  </div>
+  <canvas></canvas>
+  ${mode==='image'?'<div class="presets" data-r="pre"><button data-x="2.6">d<sub>o</sub> &gt; 2f</button><button data-x="2">d<sub>o</sub> = 2f</button><button data-x="1.5">2f &gt; d<sub>o</sub> &gt; f</button><button data-x="1">d<sub>o</sub> = f</button><button data-x="0.5">d<sub>o</sub> &lt; f</button></div>':''}
+  <div class="read" data-r="read"></div>`;
+  const cv=$('canvas',root),ctx=cv.getContext('2d'),q=s=>$(s,root);
+  let dpr=1,drag=false;
+  function resize(){const W=root.clientWidth;if(!W)return;dpr=window.devicePixelRatio||1;const H=Math.round(Math.max(250,Math.min(360,W*.45)));cv.style.height=H+'px';cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);draw()}
+  function draw(){
+    const W=cv.clientWidth,H=cv.clientHeight;if(!W)return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0e2a3f');g.addColorStop(1,'#14435e');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    const k=W/240,cx=W/2,cy=H/2,lh=H*.42,X=x=>cx+x*k,Y=y=>cy-y*k;
+    const convex=st.type==='convex',F=convex?st.f:-st.f;
+    const seg=(x1,y1,x2,y2,col,w,dash)=>{ctx.beginPath();ctx.moveTo(X(x1),Y(y1));ctx.lineTo(X(x2),Y(y2));ctx.strokeStyle=col;ctx.lineWidth=w||2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])};
+    const dot=(x,col,r)=>{ctx.beginPath();ctx.arc(X(x),cy,r||4,0,7);ctx.fillStyle=col;ctx.fill()};
+    const txt=(s,x,y,col,sz)=>{ctx.fillStyle=col||'#fff';ctx.font=(sz||12)+'px Tajawal,Tahoma,sans-serif';ctx.textAlign='center';ctx.fillText(s,x,y)};
+    const arrow=(x,y0,y1,col,dash)=>{seg(x,y0,x,y1,col,4,dash);const dir=y1>=y0?1:-1,s=7/k;ctx.beginPath();ctx.moveTo(X(x),Y(y1));ctx.lineTo(X(x)-6,Y(y1)+dir*10);ctx.lineTo(X(x)+6,Y(y1)+dir*10);ctx.closePath();ctx.fillStyle=col;ctx.fill()};
+    // محور
+    seg(-130,0,130,0,'rgba(255,255,255,.35)',1);
+    // العدسة
+    ctx.beginPath();
+    if(convex){ctx.moveTo(cx,cy-lh);ctx.quadraticCurveTo(cx-20,cy,cx,cy+lh);ctx.quadraticCurveTo(cx+20,cy,cx,cy-lh)}
+    else{ctx.moveTo(cx-12,cy-lh);ctx.lineTo(cx+12,cy-lh);ctx.quadraticCurveTo(cx+1,cy,cx+12,cy+lh);ctx.lineTo(cx-12,cy+lh);ctx.quadraticCurveTo(cx-1,cy,cx-12,cy-lh)}
+    ctx.closePath();ctx.fillStyle='rgba(125,211,252,.4)';ctx.fill();ctx.strokeStyle='#7dd3fc';ctx.lineWidth=2;ctx.stroke();
+    // البؤر
+    [-1,1].forEach(s=>{dot(s*st.f,'#ffd166',4);txt('F',X(s*st.f),cy+18,'#ffd166',12)});
+    if(mode==='image')[-1,1].forEach(s=>{dot(s*2*st.f,'#9fd8ff',3);txt('2F',X(s*2*st.f),cy+18,'#9fd8ff',11)});
+    const C1='#ffd166',C2='#7bffb0',C3='#ff9ecb',D='rgba(255,255,255,.6)';
+    if(mode==='beam'){
+      const step=lh/k*.8/3;
+      for(let i=-3;i<=3;i++){const y=i*step;
+        seg(-130,y,0,y,C1,2);
+        if(convex){seg(0,y,130,y-y/st.f*130,C1,2)}
+        else{seg(0,y,130,y+y/st.f*130,C1,2);seg(0,y,-st.f,0,D,1.5,[5,5])}}
+      const fx=convex?st.f:-st.f;
+      ctx.beginPath();ctx.arc(X(fx),cy,11,0,7);ctx.strokeStyle='#ffd166';ctx.lineWidth=2;ctx.stroke();
+      txt(convex?'بؤرة حقيقية (تجمّع)':'بؤرة خيالية (تفرّق)',X(fx),cy-20,'#ffd166',13);
+      q('[data-r=read]').innerHTML=convex?`<span class="tag real">🔍 المحدبة: تتجمّع الأشعة في البؤرة الحقيقية على بُعد f = ${st.f} سم خلف العدسة</span>`:`<span class="tag virt">🔎 المقعرة: تتباعد الأشعة وتبدو صادرة من البؤرة الخيالية أمام العدسة (f = −${st.f} سم)</span>`;
+      return;
+    }
+    // وضع الجسم والصورة
+    const h=14,d=st.d,atF=convex&&Math.abs(d-st.f)<.6;
+    arrow(-d,0,h,'#4cc2ff');txt('الجسم',X(-d),Y(h)-14,'#4cc2ff',12);
+    const rd=q('[data-r=read]');
+    if(atF){
+      seg(-d,h,0,h,C1,2);seg(0,h,130,h-h/st.f*130,C1,2);seg(-d,h,130,-h/d*130,C2,2);
+      txt('الأشعة الخارجة متوازية ⇒ لا تتكوّن صورة',cx+X(60)-cx,Y(-24),'#ffb4b4',13);
+      rd.innerHTML='<span class="tag">⚠️ الجسم عند البؤرة: الأشعة الخارجة متوازية، فلا تتكوّن صورة (تتكوّن في ما لا نهاية)</span>';
+      return;
+    }
+    const di=1/(1/F-1/d),m=-di/d,hi=m*h,real=di>0,y3=h*F/(F-d),s1=(hi-h)/di;
+    seg(-d,h,0,h,C1,2);seg(0,h,130,h+s1*130,C1,2);if(!real)seg(0,h,di,hi,D,1.5,[5,5]);
+    seg(-d,h,130,-h/d*130,C2,2);if(!real&&Math.abs(di)>d)seg(-d,h,di,hi,D,1.5,[5,5]);
+    seg(-d,h,0,y3,C3,2);seg(0,y3,130,y3,C3,2);if(!real)seg(0,y3,di,hi,D,1.5,[5,5]);
+    if(!convex)seg(0,y3,st.f,0,D,1,[3,4]);
+    if(Math.abs(di)<125){arrow(di,0,hi,real?'#ff5d5d':'#ffb347',real?null:[6,5]);txt(real?'الصورة (حقيقية)':'الصورة (خيالية)',X(di),Y(hi)+(hi>=0?-14:24),real?'#ff9d9d':'#ffd08a',12)}
+    const kind=Math.abs(Math.abs(m)-1)<.02?'مساوية للجسم':(Math.abs(m)>1?'مكبرة':'مصغرة');
+    rd.innerHTML=`<span class="tag ${real?'real':'virt'}">${real?'حقيقية':'خيالية'}</span><span class="tag ${m<0?'inv':'up'}">${m<0?'مقلوبة':'معتدلة'}</span><span class="tag ${Math.abs(m)>1.02?'big':'small'}">${kind}</span><span class="tag">d<sub>i</sub> = ${di.toFixed(1)} سم</span><span class="tag">m = ${m.toFixed(2)}</span>`;
+  }
+  function fire(){draw();if(api.onChange)api.onChange(st)}
+  function sync(){q('[data-r=fv]').textContent=st.f;q('[data-r=f]').value=st.f;if(mode==='image'){q('[data-r=dv]').textContent=Math.round(st.d);q('[data-r=d]').value=Math.round(st.d)}$$('[data-r=type] button',root).forEach(b=>b.classList.toggle('on',b.dataset.v===st.type))}
+  api.setType=t=>{st.type=t;sync();fire()};
+  api.setRatio=r=>{st.d=Math.max(10,Math.min(115,r*st.f));sync();fire()};
+  api.resize=resize;api.draw=draw;
+  q('[data-r=type]').onclick=e=>{const b=e.target.closest('button');if(b)api.setType(b.dataset.v)};
+  q('[data-r=f]').oninput=e=>{st.f=+e.target.value;sync();fire()};
+  if(mode==='image'){
+    q('[data-r=d]').oninput=e=>{st.d=+e.target.value;sync();fire()};
+    q('[data-r=pre]').onclick=e=>{const b=e.target.closest('button');if(b)api.setRatio(+b.dataset.x)};
+    const setFromPointer=e=>{const r=cv.getBoundingClientRect(),px=e.clientX-r.left;st.d=Math.max(10,Math.min(115,(r.width/2-px)/(r.width/240)));sync();fire()};
+    cv.addEventListener('pointerdown',e=>{const r=cv.getBoundingClientRect();if(e.clientX-r.left<r.width/2){drag=true;cv.setPointerCapture(e.pointerId);setFromPointer(e)}});
+    cv.addEventListener('pointermove',e=>{if(drag)setFromPointer(e)});
+    cv.addEventListener('pointerup',()=>drag=false);cv.addEventListener('pointercancel',()=>drag=false);
+  }
+  new ResizeObserver(resize).observe(root);
+  sync();resize();
+  return api;
+}
+const labBeam=Lab($('#labBeam'),'beam');
+const labImg=Lab($('#labImg'),'image');
+labBeam.onChange=s=>{S.seen[s.type]=true;if(S.seen.convex&&S.seen.concave&&!S.predShown){S.predShown=true;showPred()}};
+function showPred(){
+  const m=$('#predResult');m.classList.remove('hidden');
+  let t='';
+  if(S.pred===null)t='💡 لم تسجّل توقعًا في التهيئة — لا بأس! ';
+  else if(S.pred===0)t='✅ توقعك كان صحيحًا! ';
+  else t='🔄 توقعك كان مختلفًا — وهذا جزء رائع من التعلّم! ';
+  m.innerHTML=t+'<b>الاستنتاج:</b> العدسة المحدبة تجمّع الأشعة المتوازية، والمقعرة تفرّقها. انتقل الآن إلى مخطط فن.';
+  addPts(5);sfx.ok();
+}
+
+/* ================= مخطط فن ================= */
+const VEN=[
+ ['أسمك عند الوسط وأرق عند الأطراف','convex','المحدبة تنتفخ في وسطها.'],
+ ['أسمك عند الأطراف وأرق عند الوسط','concave','المقعرة «مقعّرة» في وسطها.'],
+ ['تجمّع الأشعة المتوازية في نقطة (بؤرة حقيقية)','convex','التجميع يحدث في المحدبة.'],
+ ['تفرّق الأشعة فتبدو صادرة من نقطة (بؤرة خيالية)','concave','التفريق خاصية المقعرة.'],
+ ['البعد البؤري موجب (f +)','convex','البؤرة الحقيقية ⇒ f موجب.'],
+ ['البعد البؤري سالب (f −)','concave','البؤرة الخيالية ⇒ f سالب.'],
+ ['تكوّن صورة حقيقية مقلوبة (إذا كان الجسم خارج البؤرة)','convex','الصورة الحقيقية تحتاج تجمّعًا فعليًا للأشعة.'],
+ ['صورها خيالية معتدلة مصغرة دائمًا','concave','لا تتقاطع الأشعة فعليًا بعد المقعرة أبدًا.'],
+ ['مصنوعة من مادة شفافة كالزجاج أو البلاستيك','both','الشفافية شرط لعبور الضوء.'],
+ ['تعمل بانكسار الضوء وتخضع لقانون سنل','both','كلتاهما تعتمد على الانكسار.'],
+ ['يمكنها تكوين صورة خيالية معتدلة','both','المحدبة (داخل البؤرة) والمقعرة (دائمًا).']
+];
+(function(){
+  const pool=$('#pool');let sel=null;
+  shuffle(VEN.map((v,i)=>i)).forEach(i=>{const c=document.createElement('div');c.className='chip';c.textContent=VEN[i][0];c.dataset.i=i;c.draggable=true;
+    c.onclick=ev=>{ev.stopPropagation();if(c.classList.contains('ok'))return;if(sel===c){c.classList.remove('sel');sel=null;arm(false);return}if(sel)sel.classList.remove('sel');sel=c;c.classList.add('sel');arm(true)};
+    c.ondragstart=e=>{e.dataTransfer.setData('text/plain',i);sel=c};
+    pool.appendChild(c)});
+  function arm(on){$$('#venn .vz').forEach(z=>z.classList.toggle('armed',on))}
+  function place(chip,zone){
+    const it=VEN[chip.dataset.i];
+    if(it[1]===zone.dataset.z){chip.classList.remove('sel','no');chip.classList.add('ok');chip.draggable=false;$('.vlist',zone).appendChild(chip);sel=null;arm(false);S.venn++;$('#vennCount').textContent=S.venn+' / '+VEN.length;addPts(5);sfx.ok();
+      if(S.venn===VEN.length){$('#vennDone').classList.remove('hidden');addPts(10);confetti()}}
+    else{chip.classList.remove('no');void chip.offsetWidth;chip.classList.add('no');sfx.bad();toast('💡 '+it[2]);setTimeout(()=>chip.classList.remove('no'),600)}
+  }
+  $$('#venn .vz').forEach(z=>{
+    z.onclick=()=>{if(sel)place(sel,z)};
+    z.ondragover=e=>{e.preventDefault();z.classList.add('over')};
+    z.ondragleave=()=>z.classList.remove('over');
+    z.ondrop=e=>{e.preventDefault();z.classList.remove('over');const i=e.dataTransfer.getData('text/plain');const c=$(`.chip[data-i="${i}"]`);if(c)place(c,z)};
+  });
+})();
+
+/* ================= الشرح: الجدول + PhET ================= */
+const ROWS=[
+ {lens:'convex',cond:'d<sub>o</sub> &gt; 2f',r:2.6,a:['real','inv','small']},
+ {lens:'convex',cond:'d<sub>o</sub> = 2f',r:2,a:['real','inv','same']},
+ {lens:'convex',cond:'2f &gt; d<sub>o</sub> &gt; f',r:1.5,a:['real','inv','big']},
+ {lens:'convex',cond:'d<sub>o</sub> = f',r:1,a:['none','na','na']},
+ {lens:'convex',cond:'f &gt; d<sub>o</sub> &gt; 0',r:.5,a:['virtual','up','big']},
+ {lens:'concave',cond:'أي موضع للجسم',r:2,a:['virtual','up','small']}
+];
+const OPT={t:[['','—'],['real','حقيقية'],['virtual','خيالية'],['none','لا تتكوّن']],o:[['','—'],['inv','مقلوبة'],['up','معتدلة'],['na','لا ينطبق']],s:[['','—'],['big','مكبرة'],['small','مصغرة'],['same','مساوية'],['na','لا ينطبق']]};
+const selHTML=(arr,k)=>`<select data-k="${k}">${arr.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('')}</select>`;
+$('#tbl').innerHTML='<tr><th>العدسة</th><th>موضع الجسم</th><th></th><th>نوع الصورة</th><th>الاتجاه</th><th>الحجم</th><th></th></tr>'+
+ ROWS.map((r,i)=>`<tr data-i="${i}"><td><span class="lbadge ${r.lens==='convex'?'cx':'cv'}">${r.lens==='convex'?'محدبة':'مقعرة'}</span></td><td>${r.cond}</td><td><button class="tryb">جرّب</button></td><td>${selHTML(OPT.t,'t')}</td><td>${selHTML(OPT.o,'o')}</td><td>${selHTML(OPT.s,'s')}</td><td class="st"></td></tr>`).join('');
+$$('#tbl .tryb').forEach(b=>b.onclick=()=>{const r=ROWS[+b.closest('tr').dataset.i];labImg.st.type=r.lens;labImg.setType(r.lens);labImg.setRatio(r.r);sfx.tick()});
+$('#tblCheck').onclick=()=>{
+  let ok=0;
+  $$('#tbl tr[data-i]').forEach(tr=>{const i=+tr.dataset.i,a=ROWS[i].a,v=['t','o','s'].map(k=>$(`select[data-k=${k}]`,tr).value);
+    const good=v.every((x,j)=>x===a[j]);tr.classList.toggle('ok',good);tr.classList.toggle('no',!good);$('.st',tr).textContent=good?'✅':'❌';
+    if(good){ok++;if(!S.rows.has(i)){S.rows.add(i);addPts(5)}}});
+  $('#tblMsg').textContent=ok===ROWS.length?'🎉 ممتاز! جدولك كامل وصحيح.':`أصبت في ${ok} من ${ROWS.length} — اضغط «جرّب» للصفوف الخاطئة وراقب المختبر.`;
+  if(ok===ROWS.length){confetti()}else sfx.bad();
+};
+$$('#expTabs button').forEach(b=>b.onclick=()=>{$$('#expTabs button').forEach(x=>x.classList.toggle('on',x===b));['A','B','C'].forEach(t=>$('#tab'+t).classList.toggle('hidden',t!==b.dataset.t));if(b.dataset.t==='A')setTimeout(()=>labImg.resize(),30)});
+$('#phetLoad').onclick=()=>{const box=$('#phetBox');box.innerHTML='<iframe title="PhET Geometric Optics" src="https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_ar.html" allowfullscreen allow="fullscreen"></iframe>';};
+const MISS=[
+ {t:'اختر العدسة المجمِّعة (Converging) وفعّل الأشعة الرئيسية (Principal Rays)، وضع الجسم أبعد من 2f.',q:'ما خصائص الصورة؟',o:['حقيقية مقلوبة مصغرة','خيالية معتدلة مكبرة','حقيقية معتدلة مكبرة'],a:0},
+ {t:'قرّب الجسم ببطء حتى يصبح بين 2f و f (يمكنك تحريك الشاشة لالتقاط الصورة).',q:'ماذا حدث للصورة؟',o:['صارت أكبر وابتعدت عن العدسة','صارت أصغر واقتربت من العدسة','لم يتغيّر شيء'],a:0},
+ {t:'أدخل الجسم داخل البؤرة (f > d₀) وفعّل خيار الصورة الخيالية (Virtual Image).',q:'ما خصائص الصورة الآن؟',o:['خيالية معتدلة مكبرة','حقيقية مقلوبة مكبرة','خيالية مقلوبة مصغرة'],a:0},
+ {t:'اضغط Reset ثم اختر العدسة المفرِّقة (Diverging) وحرّك الجسم إلى مواضع مختلفة.',q:'ماذا لاحظت؟',o:['الصورة دائمًا خيالية معتدلة مصغرة','تتكوّن صورة حقيقية إذا ابتعد الجسم','الصورة مكبرة دائمًا'],a:0},
+ {t:'تحدٍّ: غيّر معامل الانكسار (Index of Refraction) للعدسة المجمِّعة.',q:'ما أثر زيادة معامل الانكسار؟',o:['يقل البعد البؤري فتجمّع العدسة الأشعة بقوة أكبر','يزداد البعد البؤري','لا أثر له'],a:0}
+];
+$('#missions').innerHTML=MISS.map((m,i)=>`<div class="mission" data-i="${i}"><h4>🎯 المهمة ${i+1}</h4><div>${m.t}</div><div style="font-weight:700;margin-top:4px">${m.q}</div><div class="opts">${m.o.map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div></div>`).join('');
+$$('#missions .mission').forEach(el=>{const i=+el.dataset.i;$$('.opt',el).forEach(b=>b.onclick=()=>{if(S.miss.has(i))return;
+  if(+b.dataset.j===MISS[i].a){b.classList.add('ok');el.classList.add('ok');S.miss.add(i);addPts(5);sfx.ok();if(S.miss.size===MISS.length)confetti()}
+  else{b.classList.remove('no');void b.offsetWidth;b.classList.add('no');sfx.bad();toast('جرّب في المحاكاة مرة أخرى ثم اختر 🔬')}})});
+
+/* ================= التوسع ================= */
+const DEV=[
+ ['🔍','المكبرة','convex','نضع الجسم داخل البؤرة فنرى صورة خيالية معتدلة مكبرة.'],
+ ['📷','عدسة الكاميرا','convex','تكوّن صورة حقيقية مقلوبة مصغرة على المستشعر.'],
+ ['👓','نظارة قصر النظر','concave','تفرّق الأشعة قبل دخولها العين فتتكوّن الصورة على الشبكية.'],
+ ['🕶️','نظارة طول النظر','convex','تجمّع الأشعة قليلًا فتتكوّن الصورة على الشبكية.'],
+ ['📽️','جهاز عرض الشرائح','convex','يكوّن صورة حقيقية مقلوبة مكبرة على الشاشة (الجسم بين f و 2f).'],
+ ['🚪','العين السحرية للباب','concave','عدسة مقعرة تفرّق الأشعة وتعطي منظرًا واسعًا مصغرًا.']
+];
+$('#devs').innerHTML=DEV.map((d,i)=>`<div class="dev" data-i="${i}"><div class="em">${d[0]}</div><b>${d[1]}</b><div class="bb"><button data-k="convex">محدبة</button><button data-k="concave">مقعرة</button></div><small class="hidden">${d[3]}</small></div>`).join('');
+$$('#devs .dev').forEach(el=>{const i=+el.dataset.i;$$('.bb button',el).forEach(b=>b.onclick=()=>{if(el.classList.contains('ok'))return;
+  if(b.dataset.k===DEV[i][2]){el.classList.add('ok');$('small',el).classList.remove('hidden');S.dev++;$('#devCount').textContent=S.dev+' / '+DEV.length;addPts(5);sfx.ok();if(S.dev===DEV.length)confetti()}
+  else{el.classList.remove('no');void el.offsetWidth;el.classList.add('no');sfx.bad();toast('💡 فكّر: هل نحتاج تجميع الأشعة أم تفريقها؟')}})});
+
+/* ================= التقويم ================= */
+const QUIZ=[
+ {q:'وُضع جسم على بعد أكبر من 2f أمام عدسة محدبة. خصائص الصورة المتكوّنة:',o:['حقيقية، مقلوبة، مصغرة','حقيقية، معتدلة، مكبرة','خيالية، معتدلة، مكبرة','خيالية، مقلوبة، مصغرة'],a:0,e:'عندما d₀ > 2f تقع الصورة بين f و2f، وتكون حقيقية ومقلوبة ومصغرة.'},
+ {q:'وُضع جسم بين العدسة المحدبة وبؤرتها (f > d₀ > 0). الصورة:',o:['حقيقية مقلوبة مصغرة','خيالية معتدلة مكبرة','حقيقية معتدلة مكبرة','لا تتكوّن صورة'],a:1,e:'داخل البؤرة تتباعد الأشعة الخارجة وتتقاطع امتداداتها فقط، فتتكوّن صورة خيالية معتدلة مكبرة (مبدأ المكبرة).'},
+ {q:'الصورة المتكوّنة بالعدسة المقعرة تكون دائمًا:',o:['حقيقية مقلوبة','خيالية معتدلة مصغرة','خيالية معتدلة مكبرة','حقيقية معتدلة'],a:1,e:'العدسة المقعرة تفرّق الأشعة، فلا تتقاطع فعليًا أبدًا؛ فالصورة خيالية معتدلة ومصغرة.'},
+ {q:'عدسة محدبة بعدها البؤري 10 سم، وُضع جسم على بعد 30 سم منها. بعد الصورة dᵢ يساوي:',o:['7.5 سم','15 سم','20 سم','30 سم'],a:1,e:'1/dᵢ = 1/f − 1/d₀ = 1/10 − 1/30 = 2/30 ⇒ dᵢ = 15 سم، والتكبير m = −dᵢ/d₀ = −0.5 (حقيقية مقلوبة مصغرة).'},
+ {q:'إذا كان التكبير m لعدسة سالبًا فهذا يعني أن الصورة:',o:['معتدلة وخيالية','مقلوبة وحقيقية','مقلوبة وخيالية','معتدلة وحقيقية'],a:1,e:'الإشارة السالبة للتكبير تعني أن الصورة مقلوبة بالنسبة إلى الجسم، وهي صورة حقيقية.'},
+ {q:'أي العدستين تُستخدم في نظارة الطالب قصير النظر ليرى السبورة بوضوح؟',o:['مقعرة','محدبة','أي منهما','لا يحتاج إلى عدسة'],a:0,e:'في قصر النظر تتكوّن الصورة أمام الشبكية، فنستخدم عدسة مقعرة تفرّق الأشعة قبل دخولها العين.'}
+];
+QUIZ.forEach(q=>{q.e=q.e.replace('d₁','dᵢ')});
+function startQuiz(){
+  S.quiz={i:0,ans:[],done:false,items:QUIZ.map(q=>{const idx=shuffle(q.o.map((_,k)=>k));return {q:q.q,opts:idx.map(k=>q.o[k]),ci:idx.indexOf(q.a),e:q.e}})};
+  renderQ();
+}
+function renderQ(){
+  const Q=S.quiz,body=$('#quizBody');
+  $('#qbar').style.width=(Q.i/Q.items.length*100)+'%';
+  if(Q.i>=Q.items.length){
+    Q.done=true;const sc=Q.ans.filter((a,i)=>a===Q.items[i].ci).length;addPts(sc*10);if(sc>=5)confetti();
+    $('#qbar').style.width='100%';
+    body.innerHTML=`<div style="text-align:center"><div class="score">${sc} / ${Q.items.length}</div><h3>${sc===6?'🌟 أداء مبهر!':sc>=4?'👏 أحسنت!':'💪 محاولة جيدة'}</h3><p class="sub">أنجزت الاختبار الختامي. انتقل إلى التغذية الراجعة لتراجع إجاباتك وتقيس نموّك.</p><button class="btn alt" id="toFb">💬 إلى التغذية الراجعة</button></div>`;
+    $('#toFb').onclick=()=>goStage(6);return;
+  }
+  const it=Q.items[Q.i];
+  body.innerHTML=`<div style="color:var(--muted);font-weight:700">السؤال ${Q.i+1} من ${Q.items.length}</div><div class="qq">${it.q}</div><div class="opts">${it.opts.map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div><div class="row"><button class="btn" id="qNext" disabled>${Q.i===Q.items.length-1?'إنهاء الاختبار ✔️':'السؤال التالي ◀'}</button></div>`;
+  let pick=null;
+  $$('#quizBody .opt').forEach(b=>b.onclick=()=>{pick=+b.dataset.j;$$('#quizBody .opt').forEach(x=>x.classList.toggle('sel',x===b));$('#qNext').disabled=false;sfx.tick()});
+  $('#qNext').onclick=()=>{Q.ans[Q.i]=pick;Q.i++;renderQ()};
+}
+
+/* ================= التغذية الراجعة ================= */
+function score(){return S.quiz&&S.quiz.done?S.quiz.ans.filter((a,i)=>a===S.quiz.items[i].ci).length:null}
+function renderFeedback(){
+  const sc=score();
+  $('#kpis').innerHTML=[['⭐',S.pts,'نقاطك'],['📝',sc===null?'—':sc+'/6','الاختبار'],['⭕',S.venn+'/'+VEN.length,'مخطط فن'],['📋',S.rows.size+'/'+ROWS.length,'جدول الخصائص'],['🌐',S.miss.size+'/'+MISS.length,'مهام PhET'],['🌍',S.dev+'/'+DEV.length,'التطبيقات'],['🎯',S.goals+'/'+GOALS.length,'الأهداف']].map(k=>`<div class="kpi"><b>${k[0]} ${k[1]}</b><span>${k[2]}</span></div>`).join('');
+  const rv=$('#review');
+  if(!S.quiz||!S.quiz.done){rv.innerHTML='<p class="sub">أنهِ مرحلة التقويم أولًا لتظهر مراجعتك.</p>'}
+  else{const bad=S.quiz.items.map((it,i)=>({it,i,a:S.quiz.ans[i]})).filter(x=>x.a!==x.it.ci);
+    rv.innerHTML=bad.length?bad.map(x=>`<div class="rev bad"><b>س${x.i+1}: ${x.it.q}</b><br>إجابتك: ${x.it.opts[x.a]} ❌<br>الصحيحة: <b>${x.it.opts[x.it.ci]}</b> ✅<br>💡 ${x.it.e}</div>`).join(''):'<div class="rev good">🌟 أجبت عن جميع الأسئلة إجابة صحيحة! اشرح لزميلك كيف تحققت من إجاباتك.</div>'}
+  $('#growth').innerHTML=GOALS.map((g,i)=>{const b=S.rate0[i]||0,a=S.rate1[i]||0;const E=['—','🙁','😐','🙂'];
+    return `<div class="growth" data-i="${i}"><b>${i+1}</b><span style="flex:1;min-width:200px">${g.pre} ${g.a} ${g.post}</span><span>قبل: ${E[b]}</span><span class="arrow">←</span><span class="rate" style="margin:0"><button data-r="1">🙁</button><button data-r="2">😐</button><button data-r="3">🙂</button></span><span class="gain"></span></div>`}).join('');
+  $$('#growth .growth').forEach(el=>{const i=+el.dataset.i;const upd=()=>{$$('.rate button',el).forEach(b=>b.classList.toggle('on',+b.dataset.r===S.rate1[i]));const b0=S.rate0[i]||0,a=S.rate1[i]||0;$('.gain',el).textContent=a?(a>b0?'📈 تقدّم!':a===b0?'✔️ ثابت':'🔁 راجع الهدف'):''};
+    $$('.rate button',el).forEach(b=>b.onclick=()=>{S.rate1[i]=+b.dataset.r;upd();sfx.tick()});upd()});
+  $('#kwSummary').innerHTML='<b>K:</b> '+(($('#kText').value||'—').replace(/\n/g,'<br>'))+'<hr><b>W:</b> '+(($('#wText').value||'—').replace(/\n/g,'<br>'));
+}
+$$('#light button').forEach(b=>b.onclick=()=>{S.light=b.dataset.v;$$('#light button').forEach(x=>x.classList.toggle('on',x===b));sfx.tick()});
+function buildReport(){
+  const sc=score(),name=S.user?S.user.name:'(بدون اسم)',E=['—','🙁','😐','🙂'];
+  const L={red:'🔴 أحتاج مراجعة',yellow:'🟡 فهمت جزئيًا',green:'🟢 فهمت'};
+  return [`تقرير حصة العدسات المحدبة والمقعرة (5E)`,`الطالب: ${name}`,`الفصل: ${S.user&&S.user.cls?S.user.cls:'—'}`,`النقاط: ${S.pts}`,`الاختبار الختامي: ${sc===null?'لم يكتمل':sc+' / 6'}`,
+   `مخطط فن: ${S.venn}/${VEN.length} • جدول الخصائص: ${S.rows.size}/${ROWS.length} • مهام PhET: ${S.miss.size}/${MISS.length} • التطبيقات: ${S.dev}/${DEV.length}`,
+   `الأهداف (قبل → بعد): `+GOALS.map((g,i)=>`${i+1}: ${E[S.rate0[i]||0]}→${E[S.rate1[i]||0]}`).join(' | '),
+   `K: ${$('#kText').value||'—'}`,`W: ${$('#wText').value||'—'}`,`L: ${$('#lText').value||'—'}`,
+   `سؤال متبقٍ: ${$('#leftQ').value||'—'}`,`تغريدة الدرس: ${$('#tweet').value||'—'}`,`إشارة الفهم: ${S.light?L[S.light]:'—'}`].join('\n');
+}
+$('#mailBtn').onclick=()=>{const r=buildReport(),to=$('#teacherEmail').value.trim();$('#reportOut').style.display='block';$('#reportOut').textContent=r;location.href='mailto:'+encodeURIComponent(to).replace('%40','@')+'?subject='+encodeURIComponent('تقرير حصة العدسات - '+(S.user?S.user.name:'طالب')+(S.user&&S.user.cls?' - '+S.user.cls:''))+'&body='+encodeURIComponent(r)};
+$('#copyBtn').onclick=async()=>{const r=buildReport();$('#reportOut').style.display='block';$('#reportOut').textContent=r;try{await navigator.clipboard.writeText(r);toast('📋 تم نسخ التقرير')}catch(e){toast('حدّد النص وانسخه يدويًا')}};
+
+/* ================= أدوات المعلم ================= */
+$('#toolsBtn').onclick=()=>$('#tools').classList.toggle('hidden');
+$('#toolsClose').onclick=()=>$('#tools').classList.add('hidden');
+$('#soundBtn').onclick=()=>{soundOn=!soundOn;$('#soundBtn').textContent=soundOn?'🔊':'🔇'};
+const names=$('#names');names.value=store.get('names','');names.oninput=()=>store.set('names',names.value);
+const em=$('#teacherEmail');em.value=store.get('email','');em.oninput=()=>store.set('email',em.value);
+$('#pickBtn').onclick=()=>{const list=names.value.split('\n').map(s=>s.trim()).filter(Boolean);if(!list.length){toast('اكتب الأسماء أولًا');return}
+  let n=0;const out=$('#pickOut');const id=setInterval(()=>{out.textContent=list[Math.floor(Math.random()*list.length)];sfx.tick();if(++n>18){clearInterval(id);out.textContent='🎉 '+list[Math.floor(Math.random()*list.length)];sfx.ok()}},80)};
+const teams=[{n:'الفريق الأحمر 🔴',s:0},{n:'الفريق الأزرق 🔵',s:0}];
+function renderTeams(){$('#teams').innerHTML=teams.map((t,i)=>`<div class="team"><input value="${t.n}" data-i="${i}"><button data-d="-1" data-i="${i}">−</button><b>${t.s}</b><button data-d="1" data-i="${i}">+1</button><button data-d="5" data-i="${i}">+5</button></div>`).join('');
+  $$('#teams input').forEach(inp=>inp.oninput=()=>{teams[+inp.dataset.i].n=inp.value});
+  $$('#teams button').forEach(b=>b.onclick=()=>{teams[+b.dataset.i].s=Math.max(0,teams[+b.dataset.i].s+ +b.dataset.d);sfx.tick();renderTeams()})}
+renderTeams();
+$('#resetAll').onclick=()=>location.reload();
+$('#prevBtn').onclick=()=>goStage(cur-1);
+$('#nextBtn').onclick=()=>goStage(cur+1);
+
+/* ================= تشغيل ================= */
+buildNav();buildHeads();buildGoals();initKWL();startQuiz();goStage(0);initGate();
+</script>
+</body>
+</html>
